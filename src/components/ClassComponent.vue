@@ -31,6 +31,7 @@ export default class ClassComponent extends Vue.with(Props) {
   }
 
   get todoCount () {
+    console.log(this.$fb);
     return this.todos.length
   }
 }

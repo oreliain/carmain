@@ -9,7 +9,7 @@
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { configure } = require('quasar/wrappers');
-
+const envConfig = require('./src/utils/env');
 module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli/supporting-ts
@@ -31,6 +31,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
+      'firebaseConnection'
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -55,7 +56,10 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      env: {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        CONFIG: envConfig()
+      },
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
