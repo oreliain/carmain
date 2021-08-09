@@ -9,7 +9,8 @@
     "build": "quasar build",
     "dev": "quasar dev",
     "lint": "eslint --ext .js,.ts,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "i18n:extract": "vue-i18n-extract-keys -l en-US -l fr-FR -o ./src/i18n"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
+    "@oreliain/vue-i18n-extract-keys": "^2.1.0",
     "@quasar/app": "^3.0.0",
     "@types/node": "^10.17.15",
     "@typescript-eslint/eslint-plugin": "^4.16.1",

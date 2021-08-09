@@ -1,6 +1,7 @@
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
 import { AuthStateInterface } from './state';
+import firebase from 'firebase/app';
 
 const actions: ActionTree<AuthStateInterface, StateInterface> = {
   /**
@@ -11,7 +12,10 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
    * @returns {function} - Firebase services function:
    * src/services/firebase/email.js > createUserWithEmail
    */
-  createNewUser($root, { email, password }: { email: string; password: string }) {
+  createNewUser(
+    $root,
+    { email, password }: { email: string; password: string }
+  ) {
     const $fb = this.$fb;
     return $fb.createUserWithEmail(email, password);
   },
@@ -24,7 +28,10 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
    * @returns {function} - Firebase services function:
    * src/services/firebase/email.js > loginWithEmail
    */
-  loginUser($root, { email, password }: { email: string; password: string }) {
+  loginUser(
+    $root,
+    { email, password }: { email: string; password: string }
+  ): Promise<firebase.auth.UserCredential> {
     const $fb = this.$fb;
     return $fb.loginWithEmail(email, password);
   },

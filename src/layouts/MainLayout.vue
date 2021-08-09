@@ -21,7 +21,6 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
       bordered
       class="bg-grey-1"
     >
@@ -43,6 +42,13 @@
 
     <q-page-container>
       <router-view />
+      <q-ajax-bar
+        ref="bar"
+        position="top"
+        color="accent"
+        size="10px"
+        skip-hijack
+      />
     </q-page-container>
   </q-layout>
 </template>

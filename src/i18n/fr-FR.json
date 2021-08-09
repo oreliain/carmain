@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "Email": "Mail",
+    "Password": "Mot de passe",
+    "Login": "S'identifier",
+    "Not registered?": "Vous n'êtes pas enregistrés ?",
+    "Create an account": "Créez un compte",
+    "This field is required": "Ce champ est obligatoire"
+  }
+}

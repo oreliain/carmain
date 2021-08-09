@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "Email": "Email",
+    "Password": "Password",
+    "Login": "Login",
+    "Not registered?": "Not registered?",
+    "Create an account": "Create an account",
+    "This field is required": "This field is required"
+  }
+}

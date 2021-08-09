@@ -7,6 +7,8 @@ import {
 } from 'vue-router';
 import { StateInterface } from '../store';
 import routes from './routes';
+import FirebaseServices from '../services/firebase';
+import { Notify } from 'quasar';
 
 /*
  * If not building with SSR mode, you can
@@ -17,10 +19,12 @@ import routes from './routes';
  * with the Router instance.
  */
 
-export default route<StateInterface>(function (/* { store, ssrContext } */) {
+export default route<StateInterface>(function ({ store }) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+    : process.env.VUE_ROUTER_MODE === 'history'
+    ? createWebHistory
+    : createWebHashHistory;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -32,6 +36,39 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     history: createHistory(
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     ),
+  });
+
+  // Setup the router to be intercepted on each route.
+  // This allows the application to halt rendering until
+  // Firebase is finished with its initialization process,
+  // and handle the user accordingly
+  Router.beforeEach(async (to, from, next) => {
+    const { ensureAuthIsInitialized, isAuthenticated } = FirebaseServices;
+    try {
+      // Force the app to wait until Firebase has
+      // finished its initialization, and handle the
+      // authentication state of the user properly
+      await ensureAuthIsInitialized(store);
+      if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (isAuthenticated(store)) {
+          next();
+        } else {
+          next('/auth/login');
+        }
+      } else if (
+        (to.path === '/auth/register' && isAuthenticated(store)) ||
+        (to.path === '/auth/login' && isAuthenticated(store))
+      ) {
+        next('/user');
+      } else {
+        next();
+      }
+    } catch (err) {
+      Notify.create({
+        message: `${(err as Error).message}`,
+        color: 'negative',
+      });
+    }
   });
 
   return Router;
