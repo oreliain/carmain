@@ -2,6 +2,7 @@ function state() {
   return {
     isAuthenticated: false,
     isReady: false,
+    uid: '',
   };
 }
 

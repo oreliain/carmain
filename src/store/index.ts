@@ -1,10 +1,18 @@
-import {store} from 'quasar/wrappers';
-import {InjectionKey} from 'vue';
-import {createStore, Store as VuexStore, useStore as vuexUseStore,} from 'vuex';
+import { store } from 'quasar/wrappers';
+import { InjectionKey } from 'vue';
+import { vuexfireMutations } from 'vuexfire';
+import {
+  createStore,
+  Store as VuexStore,
+  useStore as vuexUseStore,
+} from 'vuex';
+import { FirebaseServicesType } from '../services/firebase';
 
 import auth from './auth';
-import {AuthStateInterface} from './auth/state';
-import {FirebaseServicesType} from '../services/firebase';
+import { AuthStateInterface } from './auth/state';
+
+import user from './user';
+import { UserStateInterface } from 'src/store/user/state';
 
 /*
  * If not building with SSR mode, you can
@@ -17,6 +25,7 @@ import {FirebaseServicesType} from '../services/firebase';
 
 export interface StateInterface {
   auth: AuthStateInterface;
+  user: UserStateInterface;
 }
 
 // provide typings for `this.$store`
@@ -41,6 +50,10 @@ export default store(function (/* { ssrContext } */) {
   return createStore<StateInterface>({
     modules: {
       auth,
+      user,
+    },
+    mutations: {
+      ...vuexfireMutations,
     },
 
     // enable strict mode (adds overhead!)

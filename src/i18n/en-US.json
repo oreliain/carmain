@@ -1,10 +1,31 @@
 {
+  "main": {
+    "Logout": "Logout",
+    "Login": "Login"
+  },
   "auth": {
     "Email": "Email",
     "Password": "Password",
+    "Verify password": "Verify password",
+    "Create account": "Create account",
     "Login": "Login",
-    "Not registered?": "Not registered?",
-    "Create an account": "Create an account",
-    "This field is required": "This field is required"
+    "Need to login?": "Need to login?",
+    "Need to create an account?": "Need to create an account?",
+    "This field is required": "This field is required",
+    "The passwords must be the same": "The passwords must be the same",
+    "Registering your account": "Registering your account...",
+    "Authenticating your account": "Authenticating your account...",
+    "Unable to found an account for this email": "Unable to found an account for this email",
+    "The password is incorrect": "The password is incorrect",
+    "The email is invalid": "The email is invalid",
+    "User has been disabled. Please, contact the support": "User has been disabled. Please, contact the support"
+  },
+  "errors": {
+    "An error as occured: {message}": "An error as occured: {message}"
+  },
+  "profile": {
+    "Email:": "Email:",
+    "Mobile number:": "Mobile number:",
+    "Please update your profile": "Please update your profile"
   }
 }

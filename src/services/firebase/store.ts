@@ -21,7 +21,13 @@ export async function handleOnAuthStateChanged(
   store.commit('auth/setAuthState', {
     isAuthenticated: currentUser !== null,
     isReady: true,
+    uid: currentUser ? currentUser.uid : ''
   });
+
+  // Get & bind the current user
+  if (store.state.auth.isAuthenticated) {
+    await store.dispatch('user/getCurrentUser', currentUser.uid)
+  }
 
   // If the user loses authentication route
   // them to the login page

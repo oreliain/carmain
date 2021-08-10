@@ -1,10 +1,31 @@
 {
+  "main": {
+    "Logout": "Déconnexion",
+    "Login": "Connexion"
+  },
   "auth": {
     "Email": "Mail",
     "Password": "Mot de passe",
+    "Verify password": "Vérifier le mot de passe",
+    "Create account": "Créer le compte",
     "Login": "S'identifier",
-    "Not registered?": "Vous n'êtes pas enregistrés ?",
-    "Create an account": "Créez un compte",
-    "This field is required": "Ce champ est obligatoire"
+    "Need to login?": "Besoin de se connecter ?",
+    "Need to create an account?": "Besoin de créer un compte ?",
+    "This field is required": "Ce champ est obligatoire",
+    "The passwords must be the same": "Les mots de passe doivent être identiques",
+    "Registering your account": "Création du compte...",
+    "Authenticating your account": "Connexion en cours...",
+    "Unable to found an account for this email": "Aucun compte n'est associé à cette adresse mail",
+    "The password is incorrect": "Le mot de passe est incorrect",
+    "The email is invalid": "Le mail doit être une adresse valide",
+    "User has been disabled. Please, contact the support": "L'utilisateur a été désactivé. Veuillez contacter le support"
+  },
+  "errors": {
+    "An error as occured: {message}": "Une erreur est survenue: {message}"
+  },
+  "profile": {
+    "Email:": "Mail :",
+    "Mobile number:": "Mobile :",
+    "Please update your profile": "Mettez à jour votre profil"
   }
 }

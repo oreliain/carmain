@@ -2,6 +2,9 @@ import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
 import { AuthStateInterface } from './state';
 import firebase from 'firebase/app';
+import { firestoreAction } from 'vuexfire';
+import { UserData } from '../../models/User';
+import { Notify } from 'quasar';
 
 const actions: ActionTree<AuthStateInterface, StateInterface> = {
   /**
@@ -12,12 +15,14 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
    * @returns {function} - Firebase services function:
    * src/services/firebase/email.js > createUserWithEmail
    */
-  createNewUser(
+  async createNewUser(
     $root,
     { email, password }: { email: string; password: string }
-  ) {
-    const $fb = this.$fb;
-    return $fb.createUserWithEmail(email, password);
+  ): Promise<firebase.auth.UserCredential> {
+    const userCredential = await this.$fb.createUserWithEmail(email, password);
+    const userRef = this.$fb.docRef<UserData>('users', userCredential.user.uid);
+    await this.$fb.addUserToUsersCollection({ email }, userRef);
+    return userCredential;
   },
 
   /**
@@ -41,8 +46,17 @@ const actions: ActionTree<AuthStateInterface, StateInterface> = {
    * src/services/firebase/email.js > logoutUser
    */
   async logoutUser() {
-    const $fb = this.$fb;
-    await $fb.logoutUser();
+    try {
+      firestoreAction(({ unbindFirestoreRef }) => {
+        unbindFirestoreRef('currentUser');
+      });
+      await this.$fb.logoutUser();
+    } catch (err) {
+      Notify.create({
+        type: 'webapp_error',
+        message: `An error as occured [logoutUser]: ${(err as Error).message}`,
+      });
+    }
   },
 };
 

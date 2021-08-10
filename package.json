@@ -20,11 +20,12 @@
     "quasar": "^2.0.0",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-i18n": "^9.0.0-beta.0",
-    "vuex": "^4.0.1"
+    "vuex": "^4.0.1",
+    "vuexfire": "^3.2.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
-    "@oreliain/vue-i18n-extract-keys": "^2.1.0",
+    "@oreliain/vue-i18n-extract-keys": "^2.1.1",
     "@quasar/app": "^3.0.0",
     "@types/node": "^10.17.15",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
