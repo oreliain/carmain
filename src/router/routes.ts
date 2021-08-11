@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/AppLayout.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/BasicLayout.vue'),
     children: [
       {
         path: 'login',
@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/user',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/AppLayout.vue'),
     children: [
       {
         path: 'profile',

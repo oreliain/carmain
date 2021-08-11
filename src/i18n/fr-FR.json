@@ -1,5 +1,16 @@
 {
+  "settings": {
+    "Edit your background image": "Modifier l'image de fond",
+    "Click to edit": "Cliquer pour modifier",
+    "Edit Your Profile": "Modifier le profil",
+    "Name": "Nom affiché",
+    "Email": "Mail",
+    "Mobile": "Mobile",
+    "Cancel": "Annuler",
+    "Save": "Sauver"
+  },
   "main": {
+    "My profile": "Mon profil",
     "Logout": "Déconnexion",
     "Login": "Connexion"
   },

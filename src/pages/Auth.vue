@@ -38,7 +38,7 @@
                 :error="!!errors.passwordMatch"
                 :label="$t('auth.Verify password')"
               >
-                <template v-slot:append>
+                <template #append>
                   <q-icon
                     :name="showPwdMatch ? 'visibility' : 'visibility_off'"
                     class="cursor-pointer"
@@ -50,7 +50,7 @@
           </q-card-section>
           <q-card-actions class="q-px-md">
             <q-btn
-              size="lg"
+              color="primary"
               class="full-width"
               :label="
                 isRegistration ? $t('auth.Create account') : $t('auth.Login')

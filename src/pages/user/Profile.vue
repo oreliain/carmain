@@ -98,7 +98,7 @@ export default class Profile extends Vue {
   }
 
   get currentUser() {
-    return this.$store.getters['user/currentUser'] as Partial<UserData>;
+    return this.$store.state.user.currentUser;
   }
 
   get editUserDialog() {

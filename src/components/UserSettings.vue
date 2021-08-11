@@ -24,8 +24,8 @@
           name="edit"
           size="20px"
           @click="showPhotoUpload('profile')"
-        ></q-icon
-        >Edit your background image
+        ></q-icon>
+        {{ $t('settings.Edit your background image') }}
       </div>
       <div
         class="profile-photo text-center"
@@ -44,7 +44,9 @@
             size="180px"
             text-color="white"
           ></q-avatar
-          ><span class="text-caption text-blue-grey-10">Click to edit</span>
+          ><span class="text-caption text-blue-grey-10">{{
+            $t('settings.Click to edit')
+          }}</span>
         </div>
         <div class="user-image column items-center" v-else>
           <q-avatar
@@ -60,14 +62,16 @@
               name="edit"
               size="16px"
             ></q-icon
-            >Click to edit</span
+            >{{ $t('settings.Click to edit') }}</span
           >
         </div>
       </div>
       <section class="user-info">
-        <h6 class="q-mt-none q-mb-md text-center">Edit Your Profile</h6>
+        <h6 class="q-mt-none q-mb-md text-center">
+          {{ $t('settings.Edit Your Profile') }}
+        </h6>
         <div class="row justify-between items-center q-mb-lg">
-          <label class="col-3" for="fullName">Name</label>
+          <label class="col-3" for="fullName">{{ $t('settings.Name') }}</label>
           <q-input
             class="col"
             id="fullName"
@@ -78,7 +82,7 @@
           ></q-input>
         </div>
         <div class="row justify-between items-center q-mb-lg">
-          <label class="col-3" for="email">Email</label>
+          <label class="col-3" for="email">{{ $t('settings.Email') }}</label>
           <q-input
             class="col"
             id="email"
@@ -89,30 +93,21 @@
           ></q-input>
         </div>
         <div class="row justify-between items-center q-mb-lg">
-          <label class="col-3" for="mobile">Mobile</label>
-          <q-input
-            class="col"
-            id="mobile"
-            v-model="mobile"
-            borderless="borderless"
-            dense="dense"
-            hint="+1(###) ###-####"
-            mask="+#(###) ###-####"
-            type="text"
-          ></q-input>
+          <label class="col-3" for="mobile">{{ $t('settings.Mobile') }}</label>
+          <q-phone-input id="mobile" v-model="mobile"></q-phone-input>
         </div>
       </section>
       <div class="row justify-between q-my-lg q-px-md absolute-bottom">
         <q-btn
           color="primary"
-          label="CANCEL"
+          :label="$t('settings.Cancel')"
           style="min-width: 6em"
           @click="setEditUserDialog(false)"
         ></q-btn>
         <q-btn
           color="primary"
           type="submit"
-          label="SAVE"
+          :label="$t('settings.Save')"
           style="min-width: 6em"
         ></q-btn>
       </div>
@@ -138,9 +133,16 @@
 import { Vue, Options } from 'vue-class-component';
 import { UserData } from '../models/User';
 import { QUploader } from 'quasar';
+import QPhoneInput from 'components/QPhoneInput.vue';
 
 @Options({
+  components: { QPhoneInput },
   mixins: [QUploader],
+  watch: {
+    mobile(newValue) {
+      console.log(newValue);
+    }
+  }
 })
 export default class UserSettings extends Vue {
   public email!: string;
@@ -160,8 +162,8 @@ export default class UserSettings extends Vue {
     };
   }
 
-  get currentUser() {
-    return this.$store.getters['user/currentUser'] as Partial<UserData>;
+  get currentUser(): Partial<UserData> {
+    return this.$store.state.user.currentUser;
   }
 
   get meta() {
@@ -172,7 +174,7 @@ export default class UserSettings extends Vue {
   }
 
   get prefixPath() {
-    const id = this.currentUser.id as string;
+    const id = this.currentUser.id;
     return `${id}/${this.photoType}Photo/${this.photoType}Photo.`;
   }
 
